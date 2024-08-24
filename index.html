@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anichin API Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="https://anime.amwp.website/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="api created with web scraping nodejs"
+    />
+    <meta
+      name="keywords"
+      content="donghua, ongoing donghua, donghua genres"
+    />
+    <meta name="author" content="AMWP" />
+    <meta property="og:title" content="Anichin API" />
+    <meta
+      property="og:description"
+      content="api created with web scraping nodejs."
+    />
+    <meta property="og:image" content="https://i.ibb.co.com/Ht9qGK0/logo.png" />
+    <meta property="og:url" content="https://anichin-api.amwp.website/" />
+    <meta property="og:type" content="website" />
+    <style>
+        /* Toggle Dark Mode */
+        body.light-mode {
+            background-color: #ffffff;
+            color: #1a202c;
+        }
+
+        body.dark-mode {
+            background-color: #1a202c;
+            color: #ffffff;
+        }
+
+        /* Circle Transition Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: inherit;
+            z-index: -1000; /* Make sure it appears above the content */
+            transition: width 0.5s ease, height 0.5s ease, top 0.5s ease, left 0.5s ease;
+            pointer-events: none; /* Prevent interaction */
+        }
+
+        body.animate-light::before {
+            background-color: #ffffff;
+            width: 200vw; /* Sufficiently large to cover the viewport */
+            height: 200vw; /* Sufficiently large to cover the viewport */
+            top: var(--circle-top);
+            left: var(--circle-left);
+        }
+
+        body.animate-dark::before {
+            background-color: #1a202c;
+            width: 200vw; /* Sufficiently large to cover the viewport */
+            height: 200vw; /* Sufficiently large to cover the viewport */
+            top: var(--circle-top);
+            left: var(--circle-left);
+        }
+
+        .method-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .get {
+            background-color: #34d399;
+            color: white;
+        }
+
+        .post {
+            background-color: #60a5fa;
+            color: white;
+        }
+
+        .code-block {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            max-height: 300px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Typing Animation */
+        .typing::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            from,
+            to {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0
+            }
+        }
+
+        /* API Card Styles */
+        .api-card {
+            transition: width 0.5s ease, height 0.5s ease, top 0.5s ease, left 0.5s ease;
+        }
+
+        .api-card.light-mode {
+            background-color: #f9fafb;
+            color: #1a202c;
+        }
+
+        .api-card.dark-mode {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+    </style>
+</head>
+
+<body class="dark-mode font-sans antialiased">
+    <div class="container mx-auto p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold mb-2">Anichin API Documentation</h1>
+            <p class="text-lg">Version 1.0.0 | Owner: AMWP (Afif Medya)</p>
+            <button id="theme-toggle" class="mt-4 px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">Toggle Light/Dark Mode</button>
+        </header>
+
+        <section>
+            <h2 class="text-2xl font-semibold mb-4">Available Endpoints</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- /home endpoint -->
+                <div class="api-card p-6 shadow rounded">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-semibold">/home</h3>
+                        <span class="method-badge get">GET</span>
+                    </div>
+                    <p class="mb-4">Home Page Anichin</p>
+                    <a href="https://anichin-api.amwp.website/home" class="text-blue-400 hover:underline">https://anichin-api.amwp.website/home</a>
+
+                    <h4 class="text-lg font-semibold mt-4">Example Response:</h4>
+                    <pre class="code-block typing"><code class="language-json" id="home-example"></code></pre>
+                </div>
+
+                <!-- /episode/:endpoint endpoint -->
+                <div class="api-card p-6 shadow rounded">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-semibold">/episode/:endpoint</h3>
+                        <span class="method-badge get">GET</span>
+                    </div>
+                    <p class="mb-4">Episode Details.</p>
+                    <a href="https://anichin-api.amwp.website/episode/:endpoint" class="text-blue-400 hover:underline">https://anichin-api.amwp.website/episode/:endpoint</a>
+
+                    <h4 class="text-lg font-semibold mt-4">Example Response:</h4>
+                    <pre class="code-block typing"><code class="language-json" id="episode-example"></code></pre>
+                </div>
+
+                <!-- /completed/:page? endpoint -->
+                <div class="api-card p-6 shadow rounded">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-semibold">/completed/:page?</h3>
+                        <span class="method-badge get">GET</span>
+                    </div>
+                    <p class="mb-4">List completed Anichin.</p>
+                    <a href="https://anichin-api.amwp.website/completed/:page?" class="text-blue-400 hover:underline">https://anichin-api.amwp.website/completed/:page?</a>
+
+                    <h4 class="text-lg font-semibold mt-4">Example Response:</h4>
+                    <pre class="code-block typing"><code class="language-json" id="completed-example"></code></pre>
+                </div>
+
+                <!-- /seri/:endpoint endpoint -->
+                <div class="api-card p-6 shadow rounded">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-semibold">/seri/:endpoint</h3>
+                        <span class="method-badge get">GET</span>
+                    </div>
+                    <p class="mb-4">List Seri Anichin.</p>
+                    <a href="https://anichin-api.amwp.website/seri/:endpoint" class="text-blue-400 hover:underline">https://anichin-api.amwp.website/seri/:endpoint</a>
+
+                    <h4 class="text-lg font-semibold mt-4">Example Response:</h4>
+                    <pre class="code-block typing"><code class="language-json" id="seri-example"></code></pre>
+                </div>
+
+                <!-- /ongoing -->
+                <div class="api-card p-6 shadow rounded">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-semibold">/ongoing</h3>
+                        <span class="method-badge get">GET</span>
+                    </div>
+                    <p class="mb-4">ongoing List</p>
+                    <a href="https://anichin-api.amwp.website/ongoing" class="text-blue-400 hover:underline">https://anichin-api.amwp.website/ongoing</a>
+
+                    <h4 class="text-lg font-semibold mt-4">Example Response:</h4>
+                    <pre class="code-block typing"><code class="language-json" id="ongoing-example"></code></pre>
+                </div>
+
+                <!-- //genres/:genrename -->
+                <div class="api-card p-6 shadow rounded">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-semibold">/genres/:genrename</h3>
+                        <span class="method-badge get">GET</span>
+                    </div>
+                    <p class="mb-4">Genres List.</p>
+                    <a href="https://anichin-api.amwp.website/genres/gore" class="text-blue-400 hover:underline">https://anichin-api.amwp.website/genres/:genrename</a>
+
+                    <h4 class="text-lg font-semibold mt-4">Example Response:</h4>
+                    <pre class="code-block typing"><code class="language-json" id="genres-example"></code></pre>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script>
+        // Dark/Light mode toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const body = document.body;
+
+            // Calculate the position of the toggle button
+            const rect = themeToggle.getBoundingClientRect();
+            const circleTop = rect.top + rect.height / 2 - window.innerHeight;
+            const circleLeft = rect.left + rect.width / 2 - window.innerWidth;
+
+            // Set the position for the circle
+            body.style.setProperty('--circle-top', `${circleTop}px`);
+            body.style.setProperty('--circle-left', `${circleLeft}px`);
+
+            // Trigger the circle animation
+            if (body.classList.contains('dark-mode')) {
+                body.classList.add('animate-light');
+                setTimeout(() => {
+                    body.classList.remove('dark-mode', 'animate-light');
+                    body.classList.add('light-mode');
+                }, 500);
+            } else {
+                body.classList.add('animate-dark');
+                setTimeout(() => {
+                    body.classList.remove('light-mode', 'animate-dark');
+                    body.classList.add('dark-mode');
+                }, 500);
+            }
+        });
+
+        // Typing effect simulation for code blocks
+        function typeWriter(element, text) {
+            let index = 0;
+            element.innerHTML = ''; // Clear previous content
+            const interval = setInterval(() => {
+                if (index < text.length) {
+                    element.textContent += text[index++];
+                    Prism.highlightElement(element);
+                } else {
+                    clearInterval(interval);
+                    Prism.highlightElement(element); // Highlight code once typing is done
+                }
+            }, 0.1);
+        }
+
+        const encodedToken = 'ENCODED TOKEN HERE';
+
+        function decodeToken(encodedToken) {
+            return atob(encodedToken); // Decode the token
+        }
+    
+        async function fetchExample(endpoint, exampleId) {
+            try {
+                const token = decodeToken(encodedToken);
+                const response = await fetch(endpoint + '?example=true', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': token
+                    }
+                });
+                const data = await response.json();
+                const exampleElement = document.getElementById(exampleId);
+                const jsonString = JSON.stringify(data, null, 2);
+                typeWriter(exampleElement, jsonString);
+            } catch (error) {
+                const exampleElement = document.getElementById(exampleId);
+                typeWriter(exampleElement, '"Failed to load example"');
+            }
+        }
+    
+        fetchExample('/home', 'home-example');
+        fetchExample('/episode/dubu-xiaoyao-episode-445-subtitle-indonesia/', 'episode-example');
+        fetchExample('/completed/1', 'completed-example');
+        fetchExample('/seri/ancient-lords/', 'seri-example');
+        fetchExample('/ongoing', 'ongoing-example');
+        fetchExample('/genres/gore', 'genres-example');
+    </script>
+</body>
+
+</html>
